@@ -33,22 +33,24 @@
         android:id="@+id/main_input_a1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text="a1" />
+        android:layout_marginTop="@dimen/small_padding"
+        android:hint="Введите исходный массив А1"
+        android:inputType="text" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/main_input_a2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:text="a2" />
+        android:layout_marginTop="@dimen/small_padding"
+        android:hint="Введите массив сортировки А2"
+        android:inputType="text" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/main_input_magic_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:text="" />
+        android:layout_marginVertical="@dimen/small_padding"
+        android:hint="Введите матрицу 3х3" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/main_card"
@@ -64,8 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/small_padding"
-            android:text="результат"
-            />
+            android:text="результат" />
 
     </com.google.android.material.card.MaterialCardView>
 
