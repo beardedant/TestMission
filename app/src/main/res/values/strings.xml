@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TestMission</string>
+    <string name="array_sorting">Сортировка массива</string>
+    <string name="magic_box">Полумагический квадрат</string>
+    <string name="calculation">рассчитать</string>
+    <string name="main_save">сохранить</string>
+    <string name="main_export">экспортировать</string>
+    <string name="main_load">загрузить</string>
+    <string name="main_import">импортировать</string>
 </resources>
