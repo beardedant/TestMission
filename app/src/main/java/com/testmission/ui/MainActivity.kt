@@ -1,4 +1,4 @@
-package com.testmission.UI
+package com.testmission.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
