@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.testmission.databinding.FragmentMainBinding
 import com.testmission.utils.CalculateMagicBoxCost
+import com.testmission.utils.CreateHalfMagicBox
 import com.testmission.utils.Sorting
 
 class MainFragment : Fragment() {
@@ -60,14 +61,10 @@ class MainFragment : Fragment() {
                 if (binding.mainEtMagicBox.text.toString().isNotEmpty()) {
                     val inputArray =
                         binding.mainEtMagicBox.text!!.toString().split(" ").map { it.toInt() }
-
-//                    var intStr = mutableListOf<Int>()
-//                    for (i in 0..inputArray.lastIndex) {
-//                        intStr.add(inputArray[i].toInt())
-//                    }
                     val result = binding.mainTvResult
                     result.visibility = View.VISIBLE
-                    result.text = CalculateMagicBoxCost().calculateCost(inputArray).toString()
+
+                    result.text = CalculateMagicBoxCost().calculateCostFromEnumeration(inputArray).toString()
                 } else {
                     Toast.makeText(
                         requireContext(),
