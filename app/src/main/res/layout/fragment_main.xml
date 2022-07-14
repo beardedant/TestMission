@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/main_array_sorting_rdb"
+            android:id="@+id/main_rdbtn_array_sorting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/extra_small_margin"
@@ -22,7 +22,7 @@
             android:text="@string/array_sorting" />
 
         <RadioButton
-            android:id="@+id/main_magic_box_rdb"
+            android:id="@+id/main_rdbtn_magic_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/magic_box" />
@@ -30,7 +30,7 @@
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/main_input_a1"
+        android:id="@+id/main_et_first_array"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/small_padding"
@@ -38,7 +38,7 @@
         android:inputType="text" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/main_input_a2"
+        android:id="@+id/main_et_second_array"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/small_padding"
@@ -46,7 +46,7 @@
         android:inputType="text" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/main_input_magic_box"
+        android:id="@+id/main_et_magic_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/small_padding"
@@ -62,7 +62,7 @@
         app:strokeWidth="1dp">
 
         <TextView
-            android:id="@+id/main_result"
+            android:id="@+id/main_tv_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/small_padding"
@@ -71,7 +71,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/main_calculation"
+        android:id="@+id/main_btn_calculation"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
         android:text="@string/calculation" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/main_save"
+        android:id="@+id/main_btn_save"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
         android:text="@string/main_save" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/main_export"
+        android:id="@+id/main_btn_export"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
         android:text="@string/main_export" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/main_load"
+        android:id="@+id/main_btn_load"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
         android:text="@string/main_load" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/main_import"
+        android:id="@+id/main_btn_import"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

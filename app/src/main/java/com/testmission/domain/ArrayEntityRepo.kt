@@ -1,5 +1,5 @@
 package com.testmission.domain
 
 interface ArrayEntityRepo {
-    fun getArrayEntity(): ArrayEntity
+    fun getArrayEntity(id: Int): ArrayEntity
 }
