@@ -7,7 +7,7 @@ import androidx.room.Query
 @Dao
 interface DataInDao {
     //select, insert
-    @Query("Select * from DataIn")
+    @Query("Select * from datain")
     fun getAll() : List<DataIn>
 
     @Insert

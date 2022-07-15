@@ -3,7 +3,7 @@ package com.testmission.room
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity (tableName = "datain")
 data class DataIn(
     @PrimaryKey(autoGenerate = true)
     val id: Int,

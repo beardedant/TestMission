@@ -17,7 +17,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        database = Room.databaseBuilder(this, DataInBase::class.java, "database")
+        database = Room.databaseBuilder(this, DataInBase::class.java, "dataInBase")
             .build()
     }
 }

@@ -86,7 +86,7 @@ class MainFragment : Fragment() {
             val dataIn = DataIn(0, inputString, "square", System.currentTimeMillis())
             try {
                 Thread {
-                    db.dataInDao().insert(dataIn)
+                    roomDao.insert(dataIn)
                 }.start()
             } catch (t: Throwable) {
 
@@ -95,6 +95,23 @@ class MainFragment : Fragment() {
 
             Toast.makeText(requireContext(), "матрица добавлена в базу данных", Toast.LENGTH_SHORT)
                 .show()
+        }
+
+        binding.mainBtnLoad.setOnClickListener {
+            var strings = mutableListOf<DataIn>()
+            try {
+                Thread {
+                    strings.addAll(roomDao.getAll())
+                    requireActivity().runOnUiThread {
+                        binding.mainTvResult.text = strings.toString()
+                    }
+                }.start()
+            } catch (t: Throwable) {
+
+            }
+
+            binding.mainTvResult.text = strings.toString()
+
         }
     }
 
