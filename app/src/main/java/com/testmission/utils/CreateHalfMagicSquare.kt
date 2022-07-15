@@ -1,11 +1,12 @@
 package com.testmission.utils
 
+import com.testmission.domain.HalfMagicSquareData
 import kotlin.random.Random
 
-class CreateHalfMagicBox {
+class CreateHalfMagicSquare {
 
     fun createHalfMagicBoxes(): List<List<Int>> {
-        val halMagicBoxesList = mutableSetOf<HalfMagicBoxData>()
+        val halMagicBoxesList = mutableSetOf<HalfMagicSquareData>()
 
         for (k in 1..9) {
             var matrixThirdDegrees = createMatrixWithStartingValue(k)
@@ -51,8 +52,8 @@ class CreateHalfMagicBox {
         return halMagicBoxesList.random().matrix
     }
 
-    private fun createMatrixWithStartingValue(value: Int): HalfMagicBoxData {
-        var matrix = HalfMagicBoxData()
+    private fun createMatrixWithStartingValue(value: Int): HalfMagicSquareData {
+        var matrix = HalfMagicSquareData()
         val values = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9).toMutableList()
         values.remove(value)
         matrix.matrix[0][0] = value

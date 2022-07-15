@@ -6,14 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.room.Room
 import com.testmission.databinding.FragmentMainBinding
-import com.testmission.utils.CalculateMagicBoxCost
+import com.testmission.domain.DataBase
+import com.testmission.domain.RoomEntityDao
+import com.testmission.utils.CalculateMagicSquareCost
 import com.testmission.utils.Sorting
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding
         get() = _binding!!
+
+    private val db = Room.databaseBuilder(
+        requireContext(),
+        DataBase::class.java, "testMission"
+    ).build()
+
+    private val roomEntity: RoomEntityDao = db.RoomEntityDao()
 
     companion object {
         fun newInstance(): MainFragment = MainFragment()
@@ -67,7 +77,7 @@ class MainFragment : Fragment() {
 //                    }
                     val result = binding.mainTvResult
                     result.visibility = View.VISIBLE
-                    result.text = CalculateMagicBoxCost().calculateCost(inputArray).toString()
+                    result.text = CalculateMagicSquareCost().calculateCost(inputArray).toString()
                 } else {
                     Toast.makeText(
                         requireContext(),
@@ -77,6 +87,8 @@ class MainFragment : Fragment() {
                 }
             }
         }
+
+
     }
 
 

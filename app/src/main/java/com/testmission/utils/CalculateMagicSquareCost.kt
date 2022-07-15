@@ -2,9 +2,9 @@ package com.testmission.utils
 
 import kotlin.math.absoluteValue
 
-class CalculateMagicBoxCost {
+class CalculateMagicSquareCost {
     fun calculateCost(inputArray: List<Int>): Int {
-        val halfMagicBoxFirst = CreateHalfMagicBox().createHalfMagicBoxes()
+        val halfMagicBoxFirst = CreateHalfMagicSquare().createHalfMagicBoxes()
         val hint = mutableListOf<Int>()
 
         for (i in 0..halfMagicBoxFirst.lastIndex)
