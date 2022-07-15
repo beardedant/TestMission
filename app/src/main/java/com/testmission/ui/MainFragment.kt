@@ -6,24 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.room.Room
+import com.testmission.App
 import com.testmission.databinding.FragmentMainBinding
-import com.testmission.domain.DataBase
-import com.testmission.domain.RoomEntityDao
+import com.testmission.room.DataInBase
+import com.testmission.room.DataIn
+import com.testmission.room.DataInDao
 import com.testmission.utils.CalculateMagicSquareCost
 import com.testmission.utils.Sorting
+import kotlin.concurrent.thread
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding
         get() = _binding!!
 
-    private val db = Room.databaseBuilder(
-        requireContext(),
-        DataBase::class.java, "testMission"
-    ).build()
-
-    private val roomEntity: RoomEntityDao = db.RoomEntityDao()
+    private val db: DataInBase = App.database
+    val roomDao: DataInDao = db.dataInDao()
 
     companion object {
         fun newInstance(): MainFragment = MainFragment()
@@ -70,11 +68,6 @@ class MainFragment : Fragment() {
                 if (binding.mainEtMagicBox.text.toString().isNotEmpty()) {
                     val inputArray =
                         binding.mainEtMagicBox.text!!.toString().split(" ").map { it.toInt() }
-
-//                    var intStr = mutableListOf<Int>()
-//                    for (i in 0..inputArray.lastIndex) {
-//                        intStr.add(inputArray[i].toInt())
-//                    }
                     val result = binding.mainTvResult
                     result.visibility = View.VISIBLE
                     result.text = CalculateMagicSquareCost().calculateCost(inputArray).toString()
@@ -88,7 +81,21 @@ class MainFragment : Fragment() {
             }
         }
 
+        binding.mainBtnSave.setOnClickListener {
+            val inputString = binding.mainEtMagicBox.text.toString()
+            val dataIn = DataIn(0, inputString, "square", System.currentTimeMillis())
+            try {
+                Thread {
+                    db.dataInDao().insert(dataIn)
+                }.start()
+            } catch (t: Throwable) {
 
+            }
+
+
+            Toast.makeText(requireContext(), "матрица добавлена в базу данных", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
 
