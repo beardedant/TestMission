@@ -29,14 +29,19 @@ class DbDataListFragment : Fragment() {
         _binding = FragmentDbDataListBinding.inflate(layoutInflater)
 
         val dbItemsHolder = binding.fragmentDbDataListRecycler
-        dbItemsHolder.layoutManager = LinearLayoutManager(requireContext())
+        val layoutManager = LinearLayoutManager(requireContext())
+        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        dbItemsHolder.layoutManager = layoutManager
 
         try {
             Thread {
                 val adapter = DbDataRecyclerAdapter(roomDao.getAll())
+                dbItemsHolder.adapter = adapter
+
                 requireActivity().runOnUiThread {
-                    dbItemsHolder.adapter = adapter
+                    adapter.notifyDataSetChanged()
                 }
+
             }.start()
         } catch (t: Throwable) {
 

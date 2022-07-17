@@ -4,5 +4,5 @@
     <dimen name="extra_small_margin">4dp</dimen>
     <dimen name="elevation">2dp</dimen>
     <dimen name="corner_radius">4dp</dimen>
-    <dimen name="stroke_width">1dp</dimen>
+    <dimen name="stroke_width">2dp</dimen>
 </resources>
