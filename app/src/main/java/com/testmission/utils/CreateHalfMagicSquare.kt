@@ -5,14 +5,8 @@ import kotlin.random.Random
 
 class CreateHalfMagicSquare {
 
-<<<<<<< HEAD:app/src/main/java/com/testmission/utils/CreateHalfMagicSquare.kt
     fun createHalfMagicBoxes(): List<List<Int>> {
         val halMagicBoxesList = mutableSetOf<HalfMagicSquareData>()
-=======
-    fun createHalfMagicBoxesRandom(): List<List<Int>> {
-        val halMagicBoxesList = mutableSetOf<HalfMagicBoxData>()
->>>>>>> master:app/src/main/java/com/testmission/utils/CreateHalfMagicBox.kt
-
         for (k in 1..9) {
             var matrixThirdDegrees = createMatrixWithStartingValue(k)
             var x0 = 0
