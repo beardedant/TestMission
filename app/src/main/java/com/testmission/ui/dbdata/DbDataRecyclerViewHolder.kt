@@ -3,7 +3,6 @@ package com.testmission.ui.dbdata
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.textfield.TextInputEditText
 import com.testmission.R
 import com.testmission.room.DataIn
 
@@ -20,9 +19,9 @@ class DbDataRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVie
 
     fun bindAll(dbValues: DataIn) {
         dataType.text = dbValues.type
-        squareArray.text = dbValues.value
-        containerArray.text = dbValues.value
-        sortableArray.text = dbValues.value
+        squareArray.text = dbValues.square
+        containerArray.text = dbValues.square
+        sortableArray.text = dbValues.square
         addNoteTime.text = dbValues.timeStamp.toString()
     }
 }
