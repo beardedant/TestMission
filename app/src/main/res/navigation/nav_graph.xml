@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/dbDataListFragment"
-        android:name="com.testmission.ui.DbDataListFragment"
+        android:name="com.testmission.ui.dbdata.DbDataListFragment"
         android:label="DbDataListFragment" >
         <action
             android:id="@+id/action_dbDataListFragment_to_mainFragment"

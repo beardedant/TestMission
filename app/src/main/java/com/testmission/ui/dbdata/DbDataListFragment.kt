@@ -1,10 +1,12 @@
-package com.testmission.ui
+package com.testmission.ui.dbdata
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.testmission.App
 import com.testmission.databinding.FragmentDbDataListBinding
 import com.testmission.room.DataIn
@@ -26,13 +28,14 @@ class DbDataListFragment : Fragment() {
     ): View {
         _binding = FragmentDbDataListBinding.inflate(layoutInflater)
 
+        val dbItemsHolder = binding.fragmentDbDataListRecycler
+        dbItemsHolder.layoutManager = LinearLayoutManager(requireContext())
 
-        val strings = mutableListOf<DataIn>()
         try {
             Thread {
-                strings.addAll(roomDao.getAll())
+                val adapter = DbDataRecyclerAdapter(roomDao.getAll())
                 requireActivity().runOnUiThread {
-//                    binding.mainTvResult.text = strings.toString()
+                    dbItemsHolder.adapter = adapter
                 }
             }.start()
         } catch (t: Throwable) {
