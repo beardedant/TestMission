@@ -10,12 +10,14 @@ import androidx.navigation.findNavController
 import com.testmission.App
 import com.testmission.R
 import com.testmission.databinding.FragmentMainBinding
+
 import com.testmission.room.DataInBase
 import com.testmission.room.DataIn
 import com.testmission.room.DataInDao
 import com.testmission.utils.CalculateMagicSquareCost
+
 import com.testmission.utils.Sorting
-import kotlin.concurrent.thread
+
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
@@ -72,7 +74,9 @@ class MainFragment : Fragment() {
                         binding.mainEtMagicBox.text!!.toString().split(" ").map { it.toInt() }
                     val result = binding.mainTvResult
                     result.visibility = View.VISIBLE
+
                     result.text = CalculateMagicSquareCost().calculateCost(inputArray).toString()
+
                 } else {
                     Toast.makeText(
                         requireContext(),

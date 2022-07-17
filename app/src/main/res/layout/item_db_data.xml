@@ -59,6 +59,7 @@
             android:layout_height="wrap_content"
             android:inputType="none"
             android:text="12:38" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </com.google.android.material.card.MaterialCardView>
