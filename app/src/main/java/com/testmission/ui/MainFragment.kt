@@ -6,15 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.testmission.App
+import com.testmission.R
 import com.testmission.databinding.FragmentMainBinding
-import com.testmission.utils.CalculateMagicBoxCost
-import com.testmission.utils.CreateHalfMagicBox
+
+import com.testmission.room.DataInBase
+import com.testmission.room.DataIn
+import com.testmission.room.DataInDao
+import com.testmission.utils.CalculateMagicSquareCost
+
 import com.testmission.utils.Sorting
+
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding
         get() = _binding!!
+
+    private val db: DataInBase = App.database
+    private val roomDao: DataInDao = db.dataInDao()
 
     companion object {
         fun newInstance(): MainFragment = MainFragment()
@@ -64,7 +75,8 @@ class MainFragment : Fragment() {
                     val result = binding.mainTvResult
                     result.visibility = View.VISIBLE
 
-                    result.text = CalculateMagicBoxCost().calculateCostFromEnumeration(inputArray).toString()
+                    result.text = CalculateMagicSquareCost().calculateCost(inputArray).toString()
+
                 } else {
                     Toast.makeText(
                         requireContext(),
@@ -73,6 +85,26 @@ class MainFragment : Fragment() {
                     ).show()
                 }
             }
+        }
+
+        binding.mainBtnSave.setOnClickListener {
+            val inputString = binding.mainEtMagicBox.text.toString()
+            val dataIn = DataIn(0, inputString, "square", System.currentTimeMillis())
+            try {
+                Thread {
+                    roomDao.insert(dataIn)
+                }.start()
+            } catch (t: Throwable) {
+
+            }
+
+
+            Toast.makeText(requireContext(), "матрица добавлена в базу данных", Toast.LENGTH_SHORT)
+                .show()
+        }
+
+        binding.mainBtnLoad.setOnClickListener {
+            view.findNavController().navigate(R.id.action_mainFragment_to_dbDataListFragment)
         }
     }
 
