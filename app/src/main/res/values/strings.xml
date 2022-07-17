@@ -7,4 +7,6 @@
     <string name="main_export">экспортировать</string>
     <string name="main_load">загрузить</string>
     <string name="main_import">импортировать</string>
+    <string name="success_message_string">операция прошла успешно</string>
+    <string name="error_message_string">введите корректные данные</string>
 </resources>

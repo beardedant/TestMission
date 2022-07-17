@@ -29,7 +29,7 @@ class DbDataListFragment : Fragment() {
         _binding = FragmentDbDataListBinding.inflate(layoutInflater)
 
         val dbItemsHolder = binding.fragmentDbDataListRecycler
-        val layoutManager = LinearLayoutManager(requireContext())
+        val layoutManager = LinearLayoutManager(requireActivity())
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         dbItemsHolder.layoutManager = layoutManager
 
