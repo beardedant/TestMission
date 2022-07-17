@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/extra_small_margin"
+
     android:clickable="true"
     android:elevation="@dimen/elevation"
     android:focusable="true"
@@ -12,53 +14,54 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/small_padding">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <TextView
             android:id="@+id/item_db_data_et_type"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:text="square" />
+            android:text="square"
+            android:layout_weight="1"
+            />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
 
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
                 android:id="@+id/item_db_data_et_square"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="none"
                 android:text="1 2 3 4 5 6 7 8" />
 
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
                 android:id="@+id/item_db_data_et_container_array"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="none"
                 android:visibility="gone" />
 
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
                 android:id="@+id/item_db_data_et_sortable_array"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="none"
                 android:visibility="gone" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <com.google.android.material.textfield.TextInputEditText
+        <TextView
             android:id="@+id/item_db_data_et_timestamp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:text="12:38" />
+            android:text="12:38"
+            android:layout_weight="1"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
