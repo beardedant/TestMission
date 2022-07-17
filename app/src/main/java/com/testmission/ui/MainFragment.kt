@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.testmission.App
+import com.testmission.R
 import com.testmission.databinding.FragmentMainBinding
 import com.testmission.room.DataInBase
 import com.testmission.room.DataIn
@@ -21,7 +23,7 @@ class MainFragment : Fragment() {
         get() = _binding!!
 
     private val db: DataInBase = App.database
-    val roomDao: DataInDao = db.dataInDao()
+    private val roomDao: DataInDao = db.dataInDao()
 
     companion object {
         fun newInstance(): MainFragment = MainFragment()
@@ -98,20 +100,7 @@ class MainFragment : Fragment() {
         }
 
         binding.mainBtnLoad.setOnClickListener {
-            var strings = mutableListOf<DataIn>()
-            try {
-                Thread {
-                    strings.addAll(roomDao.getAll())
-                    requireActivity().runOnUiThread {
-                        binding.mainTvResult.text = strings.toString()
-                    }
-                }.start()
-            } catch (t: Throwable) {
-
-            }
-
-            binding.mainTvResult.text = strings.toString()
-
+            view.findNavController().navigate(R.id.action_mainFragment_to_dbDataListFragment)
         }
     }
 
