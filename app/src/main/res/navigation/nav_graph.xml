@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.testmission.ui.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_dbDataListFragment"
+            app:destination="@id/dbDataListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dbDataListFragment"
+        android:name="com.testmission.ui.DbDataListFragment"
+        android:label="DbDataListFragment" >
+        <action
+            android:id="@+id/action_dbDataListFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>
