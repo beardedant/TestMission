@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_mainFragment_to_dbDataListFragment"
             app:destination="@id/dbDataListFragment" />
+        <argument
+            android:name="dataIn"
+            app:argType="com.testmission.room.DataIn" />
     </fragment>
     <fragment
         android:id="@+id/dbDataListFragment"

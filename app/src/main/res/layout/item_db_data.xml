@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_db_data_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/extra_small_margin"
-
     android:clickable="true"
     android:elevation="@dimen/elevation"
     android:focusable="true"
@@ -21,17 +21,15 @@
             android:id="@+id/item_db_data_et_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="none"
-            android:text="square"
             android:layout_weight="1"
-            />
+            android:inputType="none"
+            android:text="square" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_weight="1"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/item_db_data_et_square"
@@ -59,9 +57,9 @@
             android:id="@+id/item_db_data_et_timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:inputType="none"
-            android:text="12:38"
-            android:layout_weight="1"/>
+            android:text="12:38" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

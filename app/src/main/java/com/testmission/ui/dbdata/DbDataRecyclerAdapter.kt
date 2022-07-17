@@ -6,16 +6,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.testmission.R
 import com.testmission.room.DataIn
 
-class DbDataRecyclerAdapter(private val items: List<DataIn>) :
+class DbDataRecyclerAdapter(
+    private val items: List<DataIn>,
+    private val listener: DbDataClickListener
+) :
     RecyclerView.Adapter<DbDataRecyclerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DbDataRecyclerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_db_data, parent, false)
-        return DbDataRecyclerViewHolder(view)
+        return DbDataRecyclerViewHolder(view, listener)
     }
 
     override fun onBindViewHolder(holder: DbDataRecyclerViewHolder, position: Int) {
-    holder.bindAll(items[position])
+        holder.bindAll(items[position])
     }
 
     override fun getItemCount(): Int = items.size

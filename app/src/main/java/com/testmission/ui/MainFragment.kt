@@ -14,6 +14,7 @@ import com.testmission.room.DataIn
 
 import com.testmission.room.DataInBase
 import com.testmission.room.DataInDao
+import com.testmission.ui.dbdata.DbDataClickListener
 import com.testmission.utils.CalculateMagicSquareCost
 
 import com.testmission.utils.Sorting
@@ -31,10 +32,6 @@ class MainFragment : Fragment() {
 
     private lateinit var dataIn: DataIn
 
-    companion object {
-        fun newInstance(): MainFragment = MainFragment()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,6 +42,16 @@ class MainFragment : Fragment() {
         binding.mainEtMagicBox.visibility = View.GONE
         binding.mainTvResult.visibility = View.GONE
 
+        if (arguments != null && !arguments!!.isEmpty) {
+            val safeArgs = MainFragmentArgs.fromBundle(arguments!!).dataIn
+
+            binding.mainEtMagicBox.setText(safeArgs.square)
+            binding.mainEtFirstArray.setText(safeArgs.sortingArray)
+            binding.mainEtSecondArray.setText(safeArgs.containerArray)
+
+            getResultSortedArrays()
+            getResultMagicSquare()
+        }
         return binding.root
     }
 
@@ -57,30 +64,10 @@ class MainFragment : Fragment() {
         }
 
         binding.mainBtnCalculation.setOnClickListener {
-            val sortedString = binding.mainEtFirstArray.text.toString()
-            val containerString = binding.mainEtSecondArray.text.toString()
             if (binding.mainRdbtnArraySorting.isChecked) {
-                if (isValidStringsArrays()) {
-                    val result = binding.mainTvResult
-                    result.visibility = View.VISIBLE
-                    result.text = Sorting().getSorted(sortedString, containerString)
-                } else {
-                    errorMessage()
-                }
+                getResultSortedArrays()
             } else {
-                if (isValidStringMagicSquare()) {
-                    val inputArray =
-                        binding.mainEtMagicBox.text!!.toString().split(" ").map { it.toInt() }
-                    val result = binding.mainTvResult
-                    result.visibility = View.VISIBLE
-
-                    result.text =
-                        CalculateMagicSquareCost().calculateCostFromEnumeration(inputArray)
-                            .toString()
-
-                } else {
-                    errorMessage()
-                }
+                getResultMagicSquare()
             }
         }
 
@@ -94,6 +81,38 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun getResultSortedArrays() {
+        if (isValidStringsArrays()) {
+            val sortedString = binding.mainEtFirstArray.text.toString()
+            val containerString = binding.mainEtSecondArray.text.toString()
+            val result = binding.mainTvResult
+            result.visibility = View.VISIBLE
+            result.text = Sorting().getSorted(sortedString, containerString)
+            binding.mainRdbtnArraySorting.isChecked = true
+        } else {
+            errorMessage()
+        }
+    }
+
+    private fun getResultMagicSquare() {
+        if (isValidStringMagicSquare()) {
+            val inputArray =
+                binding.mainEtMagicBox.text!!.toString().split(" ").map { it.toInt() }
+            val result = binding.mainTvResult
+            result.visibility = View.VISIBLE
+
+            result.text =
+                CalculateMagicSquareCost().calculateCostFromEnumeration(inputArray)
+                    .toString()
+            binding.mainRdbtnMagicBox.isChecked = true
+            binding.mainEtFirstArray.visibility = View.GONE
+            binding.mainEtSecondArray.visibility = View.GONE
+            binding.mainEtMagicBox.visibility = View.VISIBLE
+        } else {
+            errorMessage()
+        }
     }
 
     private fun isValidStringMagicSquare(): Boolean {
@@ -162,6 +181,7 @@ class MainFragment : Fragment() {
                 roomDao.insert(dataIn)
             }.start()
         } catch (t: Throwable) {
+            errorMessage()
         }
     }
 
