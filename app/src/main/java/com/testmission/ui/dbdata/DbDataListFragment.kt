@@ -16,14 +16,14 @@ import com.testmission.databinding.FragmentDbDataListBinding
 import com.testmission.room.DataIn
 import com.testmission.room.DataInBase
 import com.testmission.room.DataInDao
+import com.testmission.ui.MainFragmentArgs
 
 class DbDataListFragment : Fragment(), DbDataClickListener {
     private var _binding: FragmentDbDataListBinding? = null
     private val binding
         get() = _binding!!
 
-    private val db: DataInBase = App.database
-    private val roomDao: DataInDao = db.dataInDao()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,23 +32,17 @@ class DbDataListFragment : Fragment(), DbDataClickListener {
     ): View {
         _binding = FragmentDbDataListBinding.inflate(layoutInflater)
 
-        val dbItemsHolder = binding.fragmentDbDataListRecycler
-        val layoutManager = LinearLayoutManager(requireActivity())
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
-        dbItemsHolder.layoutManager = layoutManager
+        if (arguments != null && !arguments!!.isEmpty) {
+            val safeArgs = DbDataListFragmentArgs.fromBundle(arguments!!).dataInList
 
-        try {
-            Thread {
-                val adapter = DbDataRecyclerAdapter(roomDao.getAll(), this)
-                dbItemsHolder.adapter = adapter
-                requireActivity().runOnUiThread {
-                    adapter.notifyDataSetChanged()
-                }
-            }.start()
-        } catch (t: Throwable) {
-            error(t.message.toString())
+            val dbItemsHolder = binding.fragmentDbDataListRecycler
+            val layoutManager = LinearLayoutManager(requireActivity())
+            layoutManager.orientation = LinearLayoutManager.VERTICAL
+            dbItemsHolder.layoutManager = layoutManager
+
+            val adapter = DbDataRecyclerAdapter(safeArgs.toList(), this)
+            dbItemsHolder.adapter = adapter
         }
-
         return binding.root
     }
 

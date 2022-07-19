@@ -6,17 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.testmission.App
 import com.testmission.R
 import com.testmission.databinding.FragmentMainBinding
+import com.testmission.fileoperation.FileRepo
 import com.testmission.room.DataIn
-
 import com.testmission.room.DataInBase
 import com.testmission.room.DataInDao
-import com.testmission.ui.dbdata.DbDataClickListener
 import com.testmission.utils.CalculateMagicSquareCost
-
 import com.testmission.utils.Sorting
 
 const val ARRAY_TYPE: String = "arrays"
@@ -73,8 +71,75 @@ class MainFragment : Fragment() {
 
         saveDataToDataBase()
 
+        loadFromDb()
+
+        saveDataToFile()
+
+        loadFromFile()
+    }
+
+    private fun loadFromFile() {
+        binding.mainBtnImport.setOnClickListener {
+            val dataList = FileRepo().readFile(requireContext())
+            val dataInList = mutableListOf<DataIn>()
+            for (i in 0..dataList.lastIndex) {
+                val string = dataList[i].split(", ")
+                dataInList.add(
+                    DataIn(
+                        0,
+                        string[0],
+                        string[1],
+                        string[2],
+                        string[3],
+                        string[4].toLong()
+                    )
+                )
+            }
+            val action =
+                MainFragmentDirections.actionMainFragmentToDbDataListFragment(dataInList.toTypedArray())
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun loadFromDb() {
         binding.mainBtnLoad.setOnClickListener {
-            view.findNavController().navigate(R.id.action_mainFragment_to_dbDataListFragment)
+            try {
+                Thread {
+                    val dataInList = roomDao.getAll()
+                    requireActivity().runOnUiThread {
+                        val action =
+                            MainFragmentDirections.actionMainFragmentToDbDataListFragment(dataInList.toTypedArray())
+                        findNavController().navigate(action)
+                    }
+                }.start()
+            } catch (t: Throwable) {
+                error(t.message.toString())
+            }
+        }
+    }
+
+    private fun saveDataToFile() {
+        binding.mainBtnExport.setOnClickListener {
+            val dataIn = if (binding.mainRdbtnArraySorting.isChecked) {
+                DataIn(
+                    0,
+                    ARRAY_TYPE,
+                    "null",
+                    binding.mainEtFirstArray.text.toString(),
+                    binding.mainEtSecondArray.text.toString(),
+                    System.currentTimeMillis()
+                )
+            } else {
+                DataIn(
+                    0,
+                    MAGIC_SQUARE_TYPE,
+                    binding.mainEtMagicBox.text.toString(),
+                    "null",
+                    "null",
+                    System.currentTimeMillis()
+                )
+            }
+            FileRepo().saveToFile(requireContext(), dataIn)
         }
     }
 
